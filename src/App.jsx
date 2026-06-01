@@ -1,10 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar'
+import Home from './pages/Home/Home'
+import Catalog from './pages/Catalog/Catalog'
+import Details from './pages/Details/Details'
+import Terminal from './pages/Terminal/Terminal'
 
 function App() {
-  return <h1>Cyber Security Academy</h1>
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalog />} />
+        <Route path="/detalhes/:id" element={<Details />} />
+        <Route path="/terminal" element={<Terminal />} />
+      </Routes>
+    </Router>
+  )
 }
 export default App
