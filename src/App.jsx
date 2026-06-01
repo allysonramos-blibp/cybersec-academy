@@ -4,6 +4,9 @@ import Home from './pages/Home/Home'
 import Catalog from './pages/Catalog/Catalog'
 import Details from './pages/Details/Details'
 import Terminal from './pages/Terminal/Terminal'
+import attacks from './data/attacks'
+
+console.log(attacks)
 
 function App() {
   return (
