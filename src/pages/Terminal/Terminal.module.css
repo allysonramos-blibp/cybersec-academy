@@ -114,3 +114,35 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+.attackWrapper {
+  margin: 12px 0;
+  max-width: 500px;
+}
+
+.inputLine {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 2px 0;
+}
+
+.inputLine pre {
+  color: #fff;
+  display: inline;
+}
+
+.outputLine pre {
+  color: #4ade80;
+  margin: 2px 0 12px 0;
+  white-space: pre-wrap;
+}
+
+.errorLine pre {
+  color: #f87171;
+  margin: 2px 0 12px 0;
+}
+
+.systemLine pre {
+  color: #888;
+  margin: 4px 0;
+}

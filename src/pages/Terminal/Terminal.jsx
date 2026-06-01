@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import attacks from '../../data/attacks.js'
 import commands from '../../data/commands.js'
+import AttackCard from '../../components/AttackCard/AttackCard'
 import styles from './Terminal.module.css'
 
 function Terminal() {
@@ -12,7 +13,6 @@ function Terminal() {
   const [isLoading, setIsLoading] = useState(false)
   const bottomRef = useRef(null)
 
-  
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [history])
@@ -23,34 +23,37 @@ function Terminal() {
     const main = parts[0]
     const arg = parts[1]
 
-    
     if (main === 'clear') {
       setHistory([])
-      return
+      return null
     }
 
-    
     if (main === 'scan') {
       if (!arg) {
-        return 'Uso correto: scan [nome-do-ataque]. Ex: scan phishing'
+        return {
+          type: 'error',
+          text: 'Uso correto: scan [nome-do-ataque]. Ex: scan phishing'
+        }
       }
       const attack = attacks.find(a => a.id === arg)
       if (!attack) {
-        return `Ataque "${arg}" não encontrado. Digite "attacks" para ver a lista.`
+        return {
+          type: 'error',
+          text: `Ataque "${arg}" não encontrado. Digite "attacks" para ver a lista.`
+        }
       }
-      return `${attack.icon} ${attack.name}
-  Categoria : ${attack.category}
-  Dificuldade: ${attack.difficulty}
-  Descrição : ${attack.description}
-  Proteção  : ${attack.howToProtect}`
+      
+      return { type: 'attack', data: attack }
     }
 
-    
     if (commands[main]) {
-      return commands[main].response
+      return { type: 'output', text: commands[main].response }
     }
 
-    return `Comando "${trimmed}" não reconhecido. Digite "help" para ajuda.`
+    return {
+      type: 'error',
+      text: `Comando "${trimmed}" não reconhecido. Digite "help" para ajuda.`
+    }
   }
 
   function handleSubmit(e) {
@@ -60,22 +63,64 @@ function Terminal() {
     const userInput = input
     setInput('')
 
-    
     setHistory(prev => [...prev, { type: 'input', text: userInput }])
 
-    
     if (userInput.trim().toLowerCase() === 'clear') {
       setHistory([])
       return
     }
 
-    
     setIsLoading(true)
     setTimeout(() => {
       const response = processCommand(userInput)
-      setHistory(prev => [...prev, { type: 'output', text: response }])
+      if (response) {
+        setHistory(prev => [...prev, response])
+      }
       setIsLoading(false)
     }, 500)
+  }
+
+  function renderLine(line, index) {
+    
+    if (line.type === 'attack') {
+      return (
+        <div key={index} className={styles.attackWrapper}>
+          <AttackCard attack={line.data} onClick={() => {}} />
+        </div>
+      )
+    }
+
+    if (line.type === 'input') {
+      return (
+        <div key={index} className={styles.inputLine}>
+          <span className={styles.prompt}>$ </span>
+          <pre>{line.text}</pre>
+        </div>
+      )
+    }
+
+    if (line.type === 'error') {
+      return (
+        <div key={index} className={styles.errorLine}>
+          <pre>{line.text}</pre>
+        </div>
+      )
+    }
+
+    if (line.type === 'output') {
+      return (
+        <div key={index} className={styles.outputLine}>
+          <pre>{line.text}</pre>
+        </div>
+      )
+    }
+
+  
+    return (
+      <div key={index} className={styles.systemLine}>
+        <pre>{line.text}</pre>
+      </div>
+    )
   }
 
   return (
@@ -92,18 +137,10 @@ function Terminal() {
         </div>
 
         <div className={styles.output}>
-          {history.map((line, index) => (
-            <div key={index} className={styles[line.type]}>
-              {line.type === 'input' && (
-                <span className={styles.prompt}>$ </span>
-              )}
-              <pre>{line.text}</pre>
-            </div>
-          ))}
+          {history.map((line, index) => renderLine(line, index))}
 
-          
           {isLoading && (
-            <div className={styles.system}>
+            <div className={styles.systemLine}>
               <pre>processando...</pre>
             </div>
           )}
