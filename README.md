@@ -1,16 +1,70 @@
-# React + Vite
+# 🛡️ CyberSec Academy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 👥 Integrantes
+| Nome | RA |
+|------|----|
+| Allyson Ramos | 5167927 |
+| Amanda Rezende | 5164912 |
+| Clériston Lima | 5166604 |
+| Débora Nascimento | 5161829 |
 
-Currently, two official plugins are available:
+## 📋 Descrição
+Portal educacional sobre cibersegurança desenvolvido como trabalho final da disciplina Linguagem de Programação para Internet — UNIUBE.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎯 Tema
+Cibersegurança — exploração de ameaças digitais, como funcionam e como se proteger.
 
-## React Compiler
+## 🚀 Tecnologias utilizadas
+- React 18
+- JavaScript
+- Vite
+- React Router DOM
+- CSS Modules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Principais funcionalidades
+- Catálogo de ameaças cibernéticas com filtro por categoria
+- Página de detalhes de cada ataque
+- Terminal interativo com comandos temáticos
+- Navegação SPA com React Router DOM
 
-## Expanding the ESLint configuration
+## 📦 Instalação
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Clone o repositório
+git clone https://github.com/SEU_USUARIO/cybersec-academy.git
+
+# Entre na pasta
+cd cybersec-academy
+
+# Instale as dependências
+npm install
+```
+
+## ▶️ Execução
+
+```bash
+npm run dev
+```
+
+Acesse: http://localhost:5173
+
+## 🔗 Repositório
+https://github.com/SEU_USUARIO/cybersec-academy
+
+## 🎨 Componente Criativo — Terminal Interativo
+
+O componente criativo é um **terminal simulado** localizado na página `/terminal`.
+
+Ele permite que o usuário digite comandos temáticos de cibersegurança e receba respostas interativas, simulando a experiência de um terminal real.
+
+**Comandos disponíveis:**
+- `help` — lista todos os comandos
+- `attacks` — lista os ataques cadastrados
+- `scan [nome]` — exibe detalhes de um ataque específico
+- `clear` — limpa o terminal
+
+**Tecnicamente utiliza:**
+- `useState` para gerenciar input, histórico e estado de loading
+- `useEffect` + `useRef` para scroll automático
+- Renderização condicional para o estado de loading
+- CSS Modules para o visual dark com fonte monospace

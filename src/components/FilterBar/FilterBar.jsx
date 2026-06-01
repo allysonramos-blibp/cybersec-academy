@@ -1,15 +1,13 @@
 import styles from './FilterBar.module.css'
 
-const categories = ['Todos', 'Engenharia Social', 'Malware', 'Rede', 'Aplicação Web']
-
-function FilterBar({ activeFilter, onFilterChange }) {
+function FilterBar({ categories, activeCategory, onSelectCategory }) {
   return (
     <div className={styles.container}>
       {categories.map(category => (
         <button
           key={category}
-          className={`${styles.button} ${activeFilter === category ? styles.active : ''}`}
-          onClick={() => onFilterChange(category)}
+          className={`${styles.btn} ${activeCategory === category ? styles.active : ''}`}
+          onClick={() => onSelectCategory(category)}
         >
           {category}
         </button>
