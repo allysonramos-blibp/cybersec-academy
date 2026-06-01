@@ -14,7 +14,7 @@ function Details() {
   if (!attack) {
     return (
       <div className={styles.notFound}>
-        <h2>⚠️ Ataque não encontrado</h2>
+        <h2>Ataque não encontrado</h2>
         <button onClick={() => navigate('/catalogo')}>
           Voltar ao catálogo
         </button>
