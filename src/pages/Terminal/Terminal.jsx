@@ -3,6 +3,8 @@ import attacks from '../../data/attacks.js'
 import commands from '../../data/commands.js'
 import AttackCard from '../../components/AttackCard/AttackCard'
 import styles from './Terminal.module.css'
+import AttackSimulation from '../../components/AttackSimulation/AttackSimulation'
+import { attackScripts } from '../../data/commands.js'
 
 function Terminal() {
   const [input, setInput] = useState('')
@@ -46,6 +48,23 @@ function Terminal() {
       return { type: 'attack', data: attack }
     }
 
+    if (main === 'attack') {
+  if (!arg) {
+    return {
+      type: 'error',
+      text: 'Uso correto: attack [nome-do-ataque]. Ex: attack phishing'
+    }
+  }
+  const script = attackScripts[arg]
+  if (!script) {
+    return {
+      type: 'error',
+      text: `Ataque "${arg}" não encontrado. Digite "attacks" para ver a lista.`
+    }
+  }
+  return { type: 'simulation', lines: script }
+}
+
     if (commands[main]) {
       return { type: 'output', text: commands[main].response }
     }
@@ -81,6 +100,14 @@ function Terminal() {
   }
 
   function renderLine(line, index) {
+
+    if (line.type === 'simulation') {
+  return (
+    <div key={index} className={styles.attackWrapper}>
+      <AttackSimulation lines={line.lines} />
+    </div>
+  )
+}
     
     if (line.type === 'attack') {
       return (

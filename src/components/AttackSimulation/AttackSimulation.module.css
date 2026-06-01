@@ -1,0 +1,42 @@
+.container {
+  margin: 8px 0 16px 0;
+  padding: 12px;
+  border: 1px solid #222;
+  border-radius: 8px;
+  background: #0a0a0a;
+}
+
+.info {
+  color: #888;
+  margin: 3px 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.warning {
+  color: #fbbf24;
+  margin: 3px 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: #4ade80;
+  margin: 3px 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.alert {
+  color: #f87171;
+  margin: 6px 0 3px 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cursor {
+  color: #4ade80;
+  animation: blink 1s step-end infinite;
+  font-family: monospace;
+}
